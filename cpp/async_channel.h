@@ -11,14 +11,6 @@ using std::list;
 using std::thread;
 using std::size_t;
 
-/** Hmmm, using pointers for channels would be inconvenient... */
-template <typename T>
-class Channel
-{
-	virtual T get();
-	virtual void put();
-};
-
 template <typename T>
 class AsyncChannel
 {
@@ -81,26 +73,4 @@ void AsyncChannel<T>::put(const T &data)
 
 	pthread_mutex_unlock(&bufLock);
 	sem_post(&dataExists);
-}
-
-void test_async_channel(AsyncChannel<int> *chan)
-{
-	while (1) {
-		int msg = chan->get();
-		cout << "Got: " << msg << '\n';
-		if (msg == 9)
-			break;
-	}
-}
-
-int main()
-{
-	AsyncChannel<int> chan(3);
-
-	thread t(test_async_channel, &chan);
-	for (int i=0; i<10; ++i) {
-		chan.put(i);
-	}
-
-	t.join();
 }
