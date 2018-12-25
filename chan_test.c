@@ -52,14 +52,14 @@ void *run_async_test(void *chan)
 
 int async_chan_test()
 {
-	const int cap = 10;
+	const int cap = 3;
 	struct achan *chan = malloc(sizeof(struct achan));
 	achan_init(chan, cap);
 
 	pthread_t tid;
 	pthread_create(&tid, NULL, run_async_test, chan);
 
-	for (int i=0; i<cap; ++i) {
+	for (int i=0; i<10; ++i) {
 		int *msg = malloc(sizeof(int));
 		*msg = i;
 		printf("Put: %d\n", i);
