@@ -1,3 +1,6 @@
+#ifndef SYNC_CHANNEL_H
+#define SYNC_CHANNEL_H
+
 #include <list>
 #include <thread>
 #include <cstddef>
@@ -71,3 +74,5 @@ void SyncChannel<T>::put(const T &data)
 	sem_post(&dataExists);	
 	sem_wait(&spaceExists);
 }
+
+#endif

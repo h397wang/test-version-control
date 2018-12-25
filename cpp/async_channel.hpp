@@ -1,3 +1,6 @@
+#ifndef ASYNC_CHANNEL_H
+#define ASYNC_CHANNEL_H
+
 #include <list>
 #include <thread>
 #include <cstddef>
@@ -72,3 +75,5 @@ void AsyncChannel<T>::put(const T &data)
 	pthread_mutex_unlock(&bufLock);
 	sem_post(&dataExists);
 }
+
+#endif
