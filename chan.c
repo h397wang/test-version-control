@@ -9,6 +9,7 @@
 struct schan {
 	void *box;
 	sem_t sem;
+	sem_t got;
 	pthread_mutex_t mut;
 };
 
@@ -18,6 +19,7 @@ int schan_init(struct schan *p)
 		return -1;
 
 	sem_init(&p->sem, 0, 0);
+	sem_destroy(&p->got);
 	pthread_mutex_init(&p->mut, NULL);
 	p->box = NULL;
 
@@ -30,6 +32,7 @@ int schan_destroy(struct schan *p)
 		return -1;
 
 	sem_destroy(&p->sem);
+	sem_destroy(&p->got);
 	pthread_mutex_destroy(&p->mut);
 	p->box = NULL;
 
@@ -45,6 +48,7 @@ int schan_put(struct schan *p, void *msg)
 	p->box = msg;
 	pthread_mutex_unlock(&p->mut);
 	sem_post(&p->sem);
+	sem_wait(&p->got);
 
 	return 0;
 }
@@ -58,6 +62,7 @@ int schan_get(struct schan *p, void **res)
 	pthread_mutex_lock(&p->mut);
 	*res = p->box;
 	pthread_mutex_unlock(&p->mut);
+	sem_post(&p->got);
 
 	return 0;
 }
