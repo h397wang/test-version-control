@@ -13,7 +13,8 @@ using std::size_t;
 
 /** Hmmm, using pointers for channels would be inconvenient... */
 template <typename T>
-class Channel {
+class Channel
+{
 	virtual T get();
 	virtual void put();
 };
