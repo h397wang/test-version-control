@@ -1,7 +1,4 @@
 #include "chan.h"
-
-#include <stdio.h>
-#include <stdlib.h>
 #include <pthread.h>
 
 int schan_init(struct schan *p)
@@ -56,33 +53,4 @@ int schan_get(struct schan *p, void **res)
 	sem_post(&p->got);
 
 	return 0;
-}
-
-void *run_receiver(void *chan)
-{
-	int *ptr;
-	while (1) {
-		schan_get(chan, (void *) &ptr);
-		printf("Got: %d\n", *ptr);
-	}
-}
-
-/** Todo: Cleanup schan semaphores after cancel */
-int main()
-{
-	struct schan *chan = malloc(sizeof(struct schan));
-	pthread_t tid;
-	pthread_create(&tid, NULL, run_receiver, chan);
-
-	int *msg = malloc(sizeof(int));
-	for (int i=0; i<10; ++i) {
-		*msg = i;
-		schan_put(chan, msg);
-	}
-
-	pthread_cancel(tid);
-	pthread_join(tid, NULL);
-
-	free(msg);
-	free(chan);
 }
