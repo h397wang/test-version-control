@@ -1,17 +1,8 @@
+#include "chan.h"
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <pthread.h>
-#include <semaphore.h>
-
-/**
- * Synchronous channel.
- */
-struct schan {
-	void *box;
-	sem_t sem;
-	sem_t got;
-	pthread_mutex_t mut;
-};
 
 int schan_init(struct schan *p)
 {
