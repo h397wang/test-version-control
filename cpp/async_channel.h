@@ -1,12 +1,10 @@
 #include <list>
 #include <thread>
 #include <cstddef>
-#include <iostream>
 
 #include <pthread.h>
 #include <semaphore.h>
 
-using std::cout;
 using std::list;
 using std::thread;
 using std::size_t;
