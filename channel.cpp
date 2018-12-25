@@ -11,6 +11,13 @@ using std::list;
 using std::thread;
 using std::size_t;
 
+/** Hmmm, using pointers for channels would be inconvenient... */
+template <typename T>
+class Channel {
+	virtual T get();
+	virtual void put();
+};
+
 template <typename T>
 class AsyncChannel
 {
