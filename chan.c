@@ -69,10 +69,10 @@ int schan_get(struct schan *p, void **res)
 
 void *run_receiver(void *chan)
 {
-	void *ptr;
+	int *ptr;
 	while (1) {
-		schan_get(chan, &ptr);
-		printf("Got: %d\n", *((int *) ptr));
+		schan_get(chan, (void *) &ptr);
+		printf("Got: %d\n", *ptr);
 	}
 }
 
