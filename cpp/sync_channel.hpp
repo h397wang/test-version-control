@@ -2,14 +2,12 @@
 #define SYNC_CHANNEL_H
 
 #include <list>
-#include <thread>
 #include <cstddef>
 
 #include <pthread.h>
 #include <semaphore.h>
 
 using std::list;
-using std::thread;
 using std::size_t;
 
 template <typename T>
