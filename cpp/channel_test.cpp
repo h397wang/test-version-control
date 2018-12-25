@@ -1,5 +1,5 @@
-#include "sync_channel.h"
-#include "async_channel.h"
+#include "sync_channel.hpp"
+#include "async_channel.hpp"
 
 #include <thread>
 #include <iostream>
