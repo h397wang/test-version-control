@@ -7,9 +7,6 @@
 #include <pthread.h>
 #include <semaphore.h>
 
-using std::list;
-using std::size_t;
-
 template <typename T>
 class SyncChannel
 {
@@ -25,7 +22,7 @@ public:
 	void put(const T& data);
 
 private:
-	list<T> buf;
+	std::list<T> buf;
 	pthread_mutex_t bufLock;
 	sem_t dataExists;
 	sem_t spaceExists;

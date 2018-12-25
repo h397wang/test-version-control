@@ -7,14 +7,11 @@
 #include <pthread.h>
 #include <semaphore.h>
 
-using std::list;
-using std::size_t;
-
 template <typename T>
 class AsyncChannel
 {
 public:
-	AsyncChannel(size_t cap);
+	AsyncChannel(std::size_t cap);
 	~AsyncChannel();
 
 	AsyncChannel(const AsyncChannel &) = delete;
@@ -25,14 +22,14 @@ public:
 	void put(const T& data);
 
 private:
-	list<T> buf;
+	std::list<T> buf;
 	pthread_mutex_t bufLock;
 	sem_t dataExists;
 	sem_t spaceExists;
 };
 
 template <typename T>
-AsyncChannel<T>::AsyncChannel(size_t cap)
+AsyncChannel<T>::AsyncChannel(std::size_t cap)
 {
 	pthread_mutex_init(&bufLock, NULL);
 	sem_init(&dataExists, 0, 0);
