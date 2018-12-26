@@ -1,3 +1,6 @@
+#ifndef CHAN_H
+#define CHAN_H
+
 #include <semaphore.h>
 
 /** Synchronous channel */
@@ -28,3 +31,5 @@ int achan_init(struct achan *p, size_t cap);
 int achan_destroy(struct achan *p);
 int achan_put(struct achan *p, void *msg);
 int achan_get(struct achan *p, void **res);
+
+#endif
