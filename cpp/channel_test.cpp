@@ -3,9 +3,7 @@
 
 #include <thread>
 #include <iostream>
-
 #include <pthread.h>
-#include <semaphore.h>
 
 using std::cout;
 using std::thread;
