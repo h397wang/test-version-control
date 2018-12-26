@@ -1,5 +1,5 @@
-#ifndef ASYNC_CHANNEL_H
-#define ASYNC_CHANNEL_H
+#ifndef ASYNC_CHANNEL_HPP
+#define ASYNC_CHANNEL_HPP
 
 #include <list>
 #include <cstddef>
